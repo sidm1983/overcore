@@ -14,7 +14,7 @@ namespace corex.@string.tests.extensions
         [InlineData("1", 1)]
         [InlineData("123", 123)]
         [InlineData("2147483647", int.MaxValue)]
-        public void WithValidIntegerAsString_ShouldReturnValidInteger(string input, int expectedOutput)
+        public void WithValidIntegerString_ShouldReturnValidInteger(string input, int expectedOutput)
         {
             var actualOutput = input.To<int>();
 
