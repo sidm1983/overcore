@@ -4,13 +4,6 @@ using corex.@string.extensions;
 
 namespace corex.@string.tests.extensions
 {
-    public enum Status
-    {
-        Ready,
-        InProgress,
-        Done
-    }
-    
     public class StringExtensionsTests
     {
         [Theory]
