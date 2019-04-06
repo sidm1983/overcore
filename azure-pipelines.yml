@@ -9,12 +9,26 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
-steps:
-- script: dotnet restore
-  displayName: 'Restore nuget dependencies'
+variables:
+  Build.Configuration: 'Release'
 
-- script: dotnet build
+steps:
+- script: dotnet build -c $(Build.Configuration)
   displayName: 'Build solution'
 
-- script: dotnet test
+- script: dotnet test -c $(Build.Configuration) --no-build
   displayName: 'Run unit tests'
+
+- task: CopyFiles@2
+  displayName: 'Stage build artifacts'
+  inputs:
+    contents: '**/bin/$(Build.Configuration)/corex.*.nupkg'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+    cleanTargetFolder: true
+    flattenFolders: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish build artifacts'
+  inputs:
+    PathtoPublish: $(Build.ArtifactStagingDirectory)
+    ArtifactName: 'nuget-packages'

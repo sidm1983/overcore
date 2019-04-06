@@ -4,7 +4,7 @@ using corex.@string.extensions;
 
 namespace corex.@string.tests.extensions
 {
-    public class StringExtensionsTests
+    public class StringConversionTests
     {
         [Theory]
         [InlineData("-128",                     SByte.MinValue)]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 [assembly: CLSCompliant(true)]
 namespace corex.@string.extensions
 {
-    public static class StringExtensions
+    public static class StringConversion
     {
         /// <summary>
         /// This extension method converts a string to a Common Language Runtime (CLR) type that has an equivalent value.
