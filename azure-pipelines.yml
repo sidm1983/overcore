@@ -22,5 +22,5 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish build artifacts'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)\**\bin\$(Build.Configuration)\*.nupkg'
+    PathtoPublish: '$(Build.SourcesDirectory)/**/bin/$(Build.Configuration)/*.nupkg'
     ArtifactName: 'nuget-packages'
