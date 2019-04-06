@@ -22,7 +22,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Stage build artifacts'
   inputs:
-    contents: '**\bin\$(Build.Configuration)\*.nupkg'
+    contents: '**/bin/$(Build.Configuration)/*.nupkg'
     targetFolder: $(Build.ArtifactStagingDirectory)
     cleanTargetFolder: true
     flattenFolders: true
@@ -30,5 +30,5 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish build artifacts'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: $(Build.ArtifactStagingDirectory)
     ArtifactName: 'nuget-packages'
