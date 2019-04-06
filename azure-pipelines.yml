@@ -19,8 +19,16 @@ steps:
 - script: dotnet test
   displayName: 'Run unit tests'
 
+- task: CopyFiles@2
+  displayName: 'Stage build artifacts'
+  inputs:
+    contents: '**\bin\$(Build.Configuration)\*.nupkg'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+    cleanTargetFolder: true
+    flattenFolders: true
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish build artifacts'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/**/bin/$(Build.Configuration)/*.nupkg'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'nuget-packages'
