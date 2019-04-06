@@ -9,12 +9,18 @@ trigger:
 pool:
   vmImage: 'Ubuntu-16.04'
 
-steps:
-- script: dotnet restore
-  displayName: 'Restore nuget dependencies'
+variables:
+  Build.Configuration: 'Release'
 
-- script: dotnet build
+steps:
+- script: dotnet build -c $(Build.Configuration)
   displayName: 'Build solution'
 
 - script: dotnet test
   displayName: 'Run unit tests'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish build artifacts'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)\**\bin\$(Build.Configuration)\*.nupkg'
+    ArtifactName: 'nuget-packages'
