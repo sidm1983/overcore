@@ -16,13 +16,13 @@ steps:
 - script: dotnet build -c $(Build.Configuration)
   displayName: 'Build solution'
 
-- script: dotnet test
+- script: dotnet test -c $(Build.Configuration) --no-build
   displayName: 'Run unit tests'
 
 - task: CopyFiles@2
   displayName: 'Stage build artifacts'
   inputs:
-    contents: '**/bin/$(Build.Configuration)/*.nupkg'
+    contents: '**/bin/$(Build.Configuration)/corex.*.nupkg'
     targetFolder: $(Build.ArtifactStagingDirectory)
     cleanTargetFolder: true
     flattenFolders: true
