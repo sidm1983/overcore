@@ -73,7 +73,7 @@ steps:
   displayName: 'Run unit tests ($(Build.NonMaster.Configuration))'
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\bin\$(Build.NonMaster.Configuration)\*\*test*.dll,!**\*TestAdapter.dll,!**\obj\**'
+    testAssemblyVer2: '**\bin\$(Build.NonMaster.Configuration)\**\*test*.dll,!**\*TestAdapter.dll,!**\obj\**'
     searchFolder: '$(System.DefaultWorkingDirectory)'
     vsTestVersion: 'latest'
     runTestsInIsolation: true
@@ -100,3 +100,9 @@ steps:
   inputs:
     PathtoPublish: $(Build.ArtifactStagingDirectory)
     ArtifactName: 'nuget-packages'
+
+task: PublishBuildArtifacts@1
+  displayName: 'Publish default working directory'
+  inputs:
+    PathtoPublish: $(System.DefaultWorkingDirectory)
+    ArtifactName: 'source'
