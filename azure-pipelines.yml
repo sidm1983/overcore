@@ -5,28 +5,59 @@
 
 trigger:
 - master
+- develop
+
+pr:
+- master
+- develop
 
 pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  Build.Configuration: 'Release'
+  Build.Master.Configuration: 'Release'
+  Build.NonMaster.Configuration: 'Debug'
 
 steps:
-- script: dotnet build -c $(Build.Configuration)
-  displayName: 'Build solution'
+  # start master build steps
+- script: dotnet build -c $(Build.Master.Configuration)
+  displayName: 'Build solution ($(Build.Master.Configuration))'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- script: dotnet test -c $(Build.Configuration) --no-build
-  displayName: 'Run unit tests'
+- script: dotnet test -c $(Build.Master.Configuration) --no-build
+  displayName: 'Run unit tests ($(Build.Master.Configuration))'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: CopyFiles@2
-  displayName: 'Stage build artifacts'
+  displayName: 'Stage build artifacts ($(Build.Master.Configuration))'
   inputs:
-    contents: '**/bin/$(Build.Configuration)/corex.*.nupkg'
+    contents: '**/bin/$(Build.Master.Configuration)/corex.*.nupkg'
     targetFolder: $(Build.ArtifactStagingDirectory)
     cleanTargetFolder: true
     flattenFolders: true
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  # end master build steps
 
+  # start non-master build steps
+- script: dotnet build -c $(Build.NonMaster.Configuration)
+  displayName: 'Build solution ($(Build.NonMaster.Configuration))'
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- script: dotnet test -c $(Build.NonMaster.Configuration) --no-build
+  displayName: 'Run unit tests ($(Build.NonMaster.Configuration))'
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- task: CopyFiles@2
+  displayName: 'Stage build artifacts ($(Build.NonMaster.Configuration))'
+  inputs:
+    contents: '**/bin/$(Build.NonMaster.Configuration)/corex.*.nupkg'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+    cleanTargetFolder: true
+    flattenFolders: true
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+  # end non-master build steps
+
+# Common last task for both master & non-master builds
 - task: PublishBuildArtifacts@1
   displayName: 'Publish build artifacts'
   inputs:
