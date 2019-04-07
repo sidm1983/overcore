@@ -31,7 +31,7 @@ steps:
 - task: PublishTestResults@2
   displayName: 'Publish test results ($(Build.Master.Configuration))'
   inputs:
-    testResultsFormat: 'xUnit'
+    testResultsFormat: 'VSTest'
     testResultsFiles: '**/TestResults/*.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
@@ -61,7 +61,7 @@ steps:
 # - task: PublishTestResults@2
 #   displayName: 'Publish test results ($(Build.NonMaster.Configuration))'
 #   inputs:
-#     testResultsFormat: 'xUnit'
+#     testResultsFormat: 'VSTest'
 #     testResultsFiles: '**/TestResults/*.xml'
 #     mergeTestResults: true
 #     failTaskOnFailedTests: true
@@ -73,7 +73,7 @@ steps:
   displayName: 'Run unit tests ($(Build.NonMaster.Configuration))'
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\$(Build.NonMaster.Configuration)\**\*test*.dll,!**\*TestAdapter.dll,!**\obj\**'
+    testAssemblyVer2: '**\$(Build.NonMaster.Configuration)\*\*test*.dll,!**\*TestAdapter.dll,!**\obj\**'
     searchFolder: '$(System.DefaultWorkingDirectory)'
     vsTestVersion: 'latest'
     runTestsInIsolation: true
