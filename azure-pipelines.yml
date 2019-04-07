@@ -73,7 +73,7 @@ steps:
   displayName: 'Run unit tests ($(Build.NonMaster.Configuration))'
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\$(Build.NonMaster.Configuration)\*test*.dll,!**\*TestAdapter.dll,!**\obj\**'
+    testAssemblyVer2: '**\$(Build.NonMaster.Configuration)\**\*test*.dll,!**\*TestAdapter.dll,!**\obj\**'
     searchFolder: '$(System.DefaultWorkingDirectory)'
     vsTestVersion: 'latest'
     runTestsInIsolation: true
