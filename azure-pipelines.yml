@@ -5,6 +5,7 @@
 
 trigger:
 - master
+- develop
 
 pool:
   vmImage: 'Ubuntu-16.04'
@@ -14,10 +15,20 @@ variables:
 
 steps:
 - script: dotnet build -c $(Build.Configuration)
+  displayName: 'Build solution ($(Build.Configuration))'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- script: dotnet build
   displayName: 'Build solution'
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - script: dotnet test -c $(Build.Configuration) --no-build
+  displayName: 'Run unit tests ($(Build.Configuration))'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- script: dotnet test --no-build
   displayName: 'Run unit tests'
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: CopyFiles@2
   displayName: 'Stage build artifacts'
