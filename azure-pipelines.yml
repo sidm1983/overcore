@@ -54,35 +54,35 @@ steps:
   displayName: 'Build solution ($(Build.NonMaster.Configuration))'
   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-# - script: dotnet test -c $(Build.NonMaster.Configuration) --no-build --logger trx
-#   displayName: 'Run unit tests ($(Build.NonMaster.Configuration))'
-#   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-
-# - task: PublishTestResults@2
-#   displayName: 'Publish test results ($(Build.NonMaster.Configuration))'
-#   inputs:
-#     testResultsFormat: 'VSTest'
-#     testResultsFiles: '**/TestResults/*.trx'
-#     mergeTestResults: true
-#     failTaskOnFailedTests: true
-#     buildConfiguration: '$(Build.NonMaster.Configuration)'
-#     publishRunAttachments: true
-#   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-
-- task: VSTest@2
+- script: dotnet test -c $(Build.NonMaster.Configuration) --no-build --logger trx
   displayName: 'Run unit tests ($(Build.NonMaster.Configuration))'
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\$(Build.NonMaster.Configuration)\*\*tests.dll,!**\*TestAdapter.dll,!**\obj\**'
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-    vsTestVersion: 'latest'
-    runTestsInIsolation: true
-    codeCoverageEnabled: true
-    configuration: '$(Build.NonMaster.Configuration)'
-    publishRunAttachments: true
-    #diagnosticsEnabled: true # Optional
-    #collectDumpOn: 'onAbortOnly' # Optional. Options: onAbortOnly, always, never
   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- task: PublishTestResults@2
+  displayName: 'Publish test results ($(Build.NonMaster.Configuration))'
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '**/TestResults/*.trx'
+    mergeTestResults: true
+    failTaskOnFailedTests: true
+    buildConfiguration: '$(Build.NonMaster.Configuration)'
+    publishRunAttachments: true
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+# - task: VSTest@2
+#   displayName: 'Run unit tests ($(Build.NonMaster.Configuration))'
+#   inputs:
+#     testSelector: 'testAssemblies'
+#     testAssemblyVer2: '**\$(Build.NonMaster.Configuration)\*\*tests.dll,!**\*TestAdapter.dll,!**\obj\**'
+#     searchFolder: '$(System.DefaultWorkingDirectory)'
+#     vsTestVersion: 'latest'
+#     runTestsInIsolation: true
+#     codeCoverageEnabled: true
+#     configuration: '$(Build.NonMaster.Configuration)'
+#     publishRunAttachments: true
+#     #diagnosticsEnabled: true # Optional
+#     #collectDumpOn: 'onAbortOnly' # Optional. Options: onAbortOnly, always, never
+#   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: CopyFiles@2
   displayName: 'Stage build artifacts ($(Build.NonMaster.Configuration))'
