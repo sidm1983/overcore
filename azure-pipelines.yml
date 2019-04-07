@@ -101,7 +101,7 @@ steps:
     PathtoPublish: $(Build.ArtifactStagingDirectory)
     ArtifactName: 'nuget-packages'
 
-task: PublishBuildArtifacts@1
+- task: PublishBuildArtifacts@1
   displayName: 'Publish default working directory'
   inputs:
     PathtoPublish: $(System.DefaultWorkingDirectory)
