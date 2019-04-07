@@ -24,7 +24,7 @@ steps:
   displayName: 'Build solution ($(Build.Master.Configuration))'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- script: dotnet test -c $(Build.Master.Configuration) --no-build --logger trx
+- script: dotnet test -c $(Build.Master.Configuration) --no-build --logger "trx;LogFileName=TestResults.xml"
   displayName: 'Run unit tests ($(Build.Master.Configuration))'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
@@ -32,7 +32,7 @@ steps:
   displayName: 'Publish test results ($(Build.Master.Configuration))'
   inputs:
     testResultsFormat: 'xUnit'
-    testResultsFiles: '**/TestResults/*.trx'
+    testResultsFiles: '**/TestResults/*.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
     buildConfiguration: '$(Build.Master.Configuration)'
@@ -54,7 +54,7 @@ steps:
   displayName: 'Build solution ($(Build.NonMaster.Configuration))'
   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- script: dotnet test -c $(Build.NonMaster.Configuration) --no-build --logger trx
+- script: dotnet test -c $(Build.NonMaster.Configuration) --no-build --logger "trx;LogFileName=TestResults.xml"
   displayName: 'Run unit tests ($(Build.NonMaster.Configuration))'
   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
@@ -62,7 +62,7 @@ steps:
   displayName: 'Publish test results ($(Build.NonMaster.Configuration))'
   inputs:
     testResultsFormat: 'xUnit'
-    testResultsFiles: '**/TestResults/*.trx'
+    testResultsFiles: '**/TestResults/*.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
     buildConfiguration: '$(Build.NonMaster.Configuration)'
