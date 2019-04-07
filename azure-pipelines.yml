@@ -24,19 +24,37 @@ steps:
   displayName: 'Build solution ($(Build.Master.Configuration))'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- script: dotnet test -c $(Build.Master.Configuration) --no-build --logger trx
-  displayName: 'Run unit tests ($(Build.Master.Configuration))'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+# - script: dotnet test -c $(Build.Master.Configuration) --no-build --logger trx
+#   displayName: 'Run unit tests ($(Build.Master.Configuration))'
+#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- task: PublishTestResults@2
-  displayName: 'Publish test results ($(Build.Master.Configuration))'
+# - task: PublishTestResults@2
+#   displayName: 'Publish test results ($(Build.Master.Configuration))'
+#   inputs:
+#     testResultsFormat: 'VSTest'
+#     testResultsFiles: '**/TestResults/*.trx'
+#     mergeTestResults: true
+#     failTaskOnFailedTests: true
+#     buildConfiguration: '$(Build.Master.Configuration)'
+#     publishRunAttachments: true
+#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- task: VSTest@2
+  displayName: 'Run unit tests ($(Build.Master.Configuration))'
   inputs:
-    testResultsFormat: 'VSTest'
-    testResultsFiles: '**/TestResults/*.trx'
-    mergeTestResults: true
-    failTaskOnFailedTests: true
-    buildConfiguration: '$(Build.Master.Configuration)'
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    vsTestVersion: 'latest'
+    runTestsInIsolation: true
+    codeCoverageEnabled: true
+    configuration: '$(Build.Master.Configuration)'
     publishRunAttachments: true
+    #diagnosticsEnabled: true # Optional
+    #collectDumpOn: 'onAbortOnly' # Optional. Options: onAbortOnly, always, never
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: CopyFiles@2
