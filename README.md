@@ -27,7 +27,7 @@ Alternatively, please help out by contributing new features or fixing existing b
 
 This class library is being built using:
 * `.NET Standard 2.0`
-* `XUnit`
+* `xUnit`
 * `Azure Devops`
 
 ### Development process

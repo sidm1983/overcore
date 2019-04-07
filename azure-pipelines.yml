@@ -24,8 +24,19 @@ steps:
   displayName: 'Build solution ($(Build.Master.Configuration))'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- script: dotnet test -c $(Build.Master.Configuration) --no-build
+- script: dotnet test -c $(Build.Master.Configuration) --no-build --logger trx
   displayName: 'Run unit tests ($(Build.Master.Configuration))'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- task: PublishTestResults@2
+  displayName: 'Publish test results ($(Build.Master.Configuration))'
+  inputs:
+    testResultsFormat: 'xUnit'
+    testResultsFiles: '**/TestResults/*.trx'
+    mergeTestResults: true
+    failTaskOnFailedTests: true
+    buildConfiguration: '$(Build.Master.Configuration)'
+    publishRunAttachments: true
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: CopyFiles@2
@@ -43,8 +54,19 @@ steps:
   displayName: 'Build solution ($(Build.NonMaster.Configuration))'
   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- script: dotnet test -c $(Build.NonMaster.Configuration) --no-build
+- script: dotnet test -c $(Build.NonMaster.Configuration) --no-build --logger trx
   displayName: 'Run unit tests ($(Build.NonMaster.Configuration))'
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+- task: PublishTestResults@2
+  displayName: 'Publish test results ($(Build.NonMaster.Configuration))'
+  inputs:
+    testResultsFormat: 'xUnit'
+    testResultsFiles: '**/TestResults/*.trx'
+    mergeTestResults: true
+    failTaskOnFailedTests: true
+    buildConfiguration: '$(Build.NonMaster.Configuration)'
+    publishRunAttachments: true
   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - task: CopyFiles@2
