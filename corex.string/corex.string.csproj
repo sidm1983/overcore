@@ -7,7 +7,7 @@
     <Authors>Sid Mansukhani</Authors>
     <Description>This package contains really handy .NET Core string extension methods.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/sidm1983/corex</RepositoryUrl>
     <PackageTags>c#;extensions;dotnet;.net;dotnetcore;netstandard;string</PackageTags>

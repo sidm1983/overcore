@@ -18,7 +18,7 @@ This class library is coming to a nuget package manager near you. That's right, 
 
 ### A note about licensing...
 
-This class library is licensed under AGPL-3.0. For more details about the license, please read the `LICENSE.txt` file in the root of the repository. 
+This class library is licensed under the MIT license. For license terms & conditions, please read the `LICENSE.txt` file in the root of the repository.
 
 ## Contributing to this repository
 
