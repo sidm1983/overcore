@@ -30,12 +30,35 @@ namespace corex.@string.tests.extensions
         [InlineData("true",                     true)]
         [InlineData("false",                    false)]
         [InlineData("x",                        'x')]
-        public void ValidInputString_ReturnsValidOutput<T>(string input, T expectedOutput) => Assert.Equal(expectedOutput, input.To<T>());
+        public void CallingTo_WithValidInputString_ReturnsValidOutput<T>(string input, T expectedOutput)
+            => Assert.Equal(expectedOutput, input.To<T>());
+        
+        [Fact]
+        public void CallingTo_WithNullInputString_ThrowsException()
+            => Assert.Throws<InvalidCastException>(() => StringConversion.To<bool>(null));
 
         [Fact]
-        public void InvalidFormatInputString_ThrowsException() => Assert.Throws<FormatException>(() => "hello".To<int>());
+        public void CallingTo_WithInvalidFormatInputString_ThrowsException()
+            => Assert.Throws<FormatException>(() => "hello".To<int>());
 
         [Fact]
-        public void OverflowFormatInputString_ThrowsException() => Assert.Throws<OverflowException>(() => "9223372036854775807".To<int>());
+        public void CallingTo_WithOverflowFormatInputString_ThrowsException()
+            => Assert.Throws<OverflowException>(() => "9223372036854775807".To<int>());
+
+        [Theory]
+        [InlineData("true", false, true)]
+        [InlineData("5.0", 10.0D, 5.0D)]
+        [InlineData("0.2", 0.1f, 0.2f)]
+        [InlineData("123", 0, 123)]
+        public void CallingTo_WithValidInputStringAndDefaultValue_ReturnsValidOutputAndNotDefaultValue<T>(string input, T defaultValue, T expectedOutput)
+            => Assert.Equal(expectedOutput, input.To<T>(defaultValue));
+
+        [Theory]
+        [InlineData(null, false)]
+        [InlineData("", 10.0D)]
+        [InlineData("hello", 0.1f)]
+        [InlineData("9223372036854775807", -1)]
+        public void CallingTo_WithInvalidInputStringAndDefaultValue_ReturnsDefaultValue<T>(string input, T defaultValue)
+            => Assert.Equal(defaultValue, input.To<T>(defaultValue));
     }
 }
