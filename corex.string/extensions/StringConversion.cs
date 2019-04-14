@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace corex.@string.extensions
 {
     /// <summary>
-    /// A static class containing extension methods that convert a string into other types.
+    /// A class containing extension methods that convert a string into other types.
     /// </summary>
     public static class StringConversion
     {

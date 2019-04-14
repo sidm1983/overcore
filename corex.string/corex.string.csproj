@@ -11,6 +11,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/sidm1983/corex</RepositoryUrl>
     <PackageTags>c#;extensions;dotnet;.net;dotnetcore;netstandard;string</PackageTags>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>
