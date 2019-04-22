@@ -8,7 +8,7 @@ A .NET Standard 2.0 class library full of handy extension methods that is also C
 
 ## What's an extension method?
 
-If you are new to .NET/C# programming and have never implemented or even heard of extension methods, then please read Microsoft's documentation about [Extension Methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods#binding-extension-methods-at-compile-time). There are also many other tutorials and guides online about this topic.
+If you are new to .NET/C# programming and have never implemented or even heard of extension methods, then please read Microsoft's documentation about [Extension Methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods). There are also many other tutorials and guides online about this topic.
 
 ## Using this class library
 
