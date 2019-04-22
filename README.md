@@ -1,13 +1,24 @@
 # overcore
 
 [![Build Status](https://dev.azure.com/sid1983/overcore/_apis/build/status/sidm1983.overcore?branchName=master)](https://dev.azure.com/sid1983/overcore/_build/latest?definitionId=2&branchName=master)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=coverage)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=alert_status)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=security_rating)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=bugs)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=code_smells)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=sqale_index)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=ncloc)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A .NET Standard 2.0 class library full of handy extension methods that is also CLS-Compliant. This class library is free to use for personal and commercial projects.
 
 ## What's an extension method?
 
-If you are new to .NET/C# programming and have never implemented or even heard of extension methods, then please read Microsoft's documentation about [Extension Methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods#binding-extension-methods-at-compile-time). There are also many other tutorials and guides online about this topic.
+If you are new to .NET/C# programming and have never implemented or even heard of extension methods, then please read Microsoft's documentation about [Extension Methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods). There are also many other tutorials and guides online about this topic.
 
 ## Using this class library
 
