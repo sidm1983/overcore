@@ -28,6 +28,7 @@ steps:
     SonarCloud: sonarcloud
     organization: '$(sonar.organization)'
     projectKey: '$(sonar.projectKey)'
+    extraProperties: 'sonar.cs.vscoveragexml.reportsPaths=**/*.coveragexml'
   
   # start master build steps
 - script: dotnet build -c $(Build.Master.Configuration)
