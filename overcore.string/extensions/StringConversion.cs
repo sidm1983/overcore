@@ -35,7 +35,10 @@ namespace overcore.@string.extensions
                     return output;
                 }
             }
-            catch {} //Intentionally ignoring any exceptions as we just want it to return the default value that was passed in if an exception does occur.
+            catch
+            {
+                //Intentionally ignoring any exceptions as we just want it to return the default value that was passed in if an exception does occur.
+            }
 
             return defaultValue;
         }
