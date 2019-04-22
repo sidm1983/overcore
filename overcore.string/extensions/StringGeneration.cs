@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace corex.@string.extensions
+namespace overcore.@string.extensions
 {
     /// <summary>
     /// A class containing extension methods that assist in various string generation scenarios.

@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/corex.string.tests/corex.string.tests.csproj"
+                "${workspaceFolder}/overcore.string.tests/overcore.string.tests.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -17,7 +17,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/corex.string.tests/corex.string.tests.csproj"
+                "${workspaceFolder}/overcore.string.tests/overcore.string.tests.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -28,7 +28,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/corex.string.tests/corex.string.tests.csproj"
+                "${workspaceFolder}/overcore.string.tests/overcore.string.tests.csproj"
             ],
             "problemMatcher": "$tsc"
         }

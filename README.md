@@ -1,6 +1,6 @@
-# corex
+# overcore
 
-[![Build Status](https://dev.azure.com/sid1983/sid1983/_apis/build/status/sidm1983.corex?branchName=master)](https://dev.azure.com/sid1983/sid1983/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://dev.azure.com/sid1983/sid1983/_apis/build/status/sidm1983.overcore?branchName=master)](https://dev.azure.com/sid1983/sid1983/_build/latest?definitionId=1&branchName=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A .NET Standard 2.0 class library full of handy extension methods that is also CLS-Compliant. This class library is free to use for personal and commercial projects.
@@ -29,7 +29,7 @@ Alternatively, please help out by contributing new features or fixing existing b
 
 To fetch the latest stable source, clone the `master` branch of the github repository using the following command:
 
-`> git clone https://github.com/sidm1983/corex.git`
+`> git clone https://github.com/sidm1983/overcore.git`
 
 #### Building the solution (dotnet CLI)
 
@@ -49,7 +49,7 @@ To execute all the unit tests from all the projects in the solution, run:
 
 Alternatively, you can execute the tests for a specific project by running the following command:
 
-`> dotnet test corex.string.tests/corex.string.tests.csproj`
+`> dotnet test overcore.string.tests/overcore.string.tests.csproj`
 
 ### Technology stack
 
@@ -76,14 +76,14 @@ It is also important to add certain keywords to your commit messages so that com
 
 ### Project structure
 ```
-+-- corex.sln
-+-- corex.string
++-- overcore.sln
++-- overcore.string
 |   +-- extensions
 |   |   +-- StringConversion.cs
-|   +-- corex.string.csproj
-+-- corex.string.tests
-+-- corex.<type>
-+-- corex.<type>.tests
+|   +-- overcore.string.csproj
++-- overcore.string.tests
++-- overcore.<type>
++-- overcore.<type>.tests
 ```
 The solution file has multiple projects within it. The plan is to separate extension methods for a particular type into a project on its own. This means that all the extension methods of a particular type are grouped together and will ultimately be in a nuget package of their own. This allows other projects that consume this class library to only add the nuget references for the set of extension methods they need.
 

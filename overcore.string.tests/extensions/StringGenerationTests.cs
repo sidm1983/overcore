@@ -1,10 +1,10 @@
 using System;
 using Xunit;
 using Xunit.Abstractions;
-using corex.@string.extensions;
+using overcore.@string.extensions;
 using System.Linq;
 
-namespace corex.@string.tests.extensions
+namespace overcore.@string.tests.extensions
 {
     public class StringGenerationTests
     {
