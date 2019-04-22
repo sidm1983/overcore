@@ -1,6 +1,7 @@
 # overcore
 
 [![Build Status](https://dev.azure.com/sid1983/overcore/_apis/build/status/sidm1983.overcore?branchName=master)](https://dev.azure.com/sid1983/overcore/_build/latest?definitionId=2&branchName=master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sidm1983_overcore&metric=alert_status)](https://sonarcloud.io/dashboard?id=sidm1983_overcore)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A .NET Standard 2.0 class library full of handy extension methods that is also CLS-Compliant. This class library is free to use for personal and commercial projects.
