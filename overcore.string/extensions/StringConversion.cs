@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 [assembly: CLSCompliant(true)]
-namespace corex.@string.extensions
+namespace overcore.@string.extensions
 {
     /// <summary>
-    /// A static class containing extension methods that convert a string into other types.
+    /// A class containing extension methods that convert a string into other types.
     /// </summary>
     public static class StringConversion
     {

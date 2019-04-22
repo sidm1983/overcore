@@ -2,15 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>corex.string</PackageId>
+    <PackageId>overcore.string</PackageId>
     <Version>0.0.1</Version>
     <Authors>Sid Mansukhani</Authors>
     <Description>This package contains really handy .NET Core string extension methods.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <RepositoryUrl>https://github.com/sidm1983/corex</RepositoryUrl>
+    <RepositoryUrl>https://github.com/sidm1983/overcore</RepositoryUrl>
     <PackageTags>c#;extensions;dotnet;.net;dotnetcore;netstandard;string</PackageTags>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

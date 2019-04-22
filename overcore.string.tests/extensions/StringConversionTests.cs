@@ -1,8 +1,8 @@
 using System;
 using Xunit;
-using corex.@string.extensions;
+using overcore.@string.extensions;
 
-namespace corex.@string.tests.extensions
+namespace overcore.@string.tests.extensions
 {
     public class StringConversionTests
     {
