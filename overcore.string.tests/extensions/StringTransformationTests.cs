@@ -22,17 +22,34 @@ namespace overcore.@string.tests.extensions
         [ClassData(typeof(HashHexTestData))]
         public void ComputeHashHexTests<T>(string input, T hashAlgorithm, Encoding encoding, string expectedHashHex) where T : HashAlgorithm, new()
         {
-            var actualHashHex = input.ComputeHashHex<T>(hashAlgorithm, encoding);
+            var actualHashHex = input.ComputeHashHex<T>(encoding);
             output.WriteLine($"{hashAlgorithm.GetType().Name} hash hex of \"{input}\": {actualHashHex}");
             Assert.Equal(expectedHashHex, actualHashHex);
+        }
+
+        //Had to add a separate method for null tests instead of adding it to the above test method's class data because
+        //a null value is not accepted through the 'ClassData' attribute on a generic test method.
+        [Fact]
+        public void ComputeHashHex_WithNullInput_ReturnsValidHashes()
+        {
+            var actualMd5HashHex = StringTransformation.ComputeHashHex<MD5CryptoServiceProvider>(null, Encoding.UTF8);
+            var actualSha1HashHex = StringTransformation.ComputeHashHex<SHA1Managed>(null, Encoding.UTF8);
+            var actualSha256HashHex = StringTransformation.ComputeHashHex<SHA256Managed>(null, Encoding.UTF8);
+            var actualSha384HashHex = StringTransformation.ComputeHashHex<SHA384Managed>(null, Encoding.UTF8);
+            var actualSha512HashHex = StringTransformation.ComputeHashHex<SHA512Managed>(null, Encoding.UTF8);
+            Assert.Equal("d41d8cd98f00b204e9800998ecf8427e", actualMd5HashHex);
+            Assert.Equal("da39a3ee5e6b4b0d3255bfef95601890afd80709", actualSha1HashHex);
+            Assert.Equal("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", actualSha256HashHex);
+            Assert.Equal("38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b", actualSha384HashHex);
+            Assert.Equal("cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e", actualSha512HashHex);
         }
     }
 
     public class HashHexTestData : IEnumerable<object[]>
     {
-        private static Encoding defaultEncoding = Encoding.UTF8;
+        private static readonly Encoding defaultEncoding = Encoding.UTF8;
 
-        private static string[] inputsToHash =
+        private static readonly string[] inputsToHash =
         {
             //Arabic
             "مرحبا بالعالم",
@@ -56,9 +73,11 @@ namespace overcore.@string.tests.extensions
             "Olá mundo",
             //Russian
             "Здравствуй, мир",
+            //Empty
+            string.Empty
         };
 
-        private static HashAlgorithm[] hashAlgorithms =
+        private static readonly HashAlgorithm[] hashAlgorithms =
         {
             new MD5CryptoServiceProvider(),
             new SHA1Managed(),
@@ -67,7 +86,7 @@ namespace overcore.@string.tests.extensions
             new SHA512Managed()
         };
 
-        private static string[,] hashMatrix =
+        private static readonly string[,] hashMatrix =
         {
             //Arabic: "مرحبا بالعالم"
             {
@@ -211,6 +230,19 @@ namespace overcore.@string.tests.extensions
                 "2febd24501acfa4cc461587e6322db623322483d4fe7651993b68c1b689915b073bd88ec007bbdb4011cc6e75dae11de",
                 //SHA512
                 "da5b3b832f7e57abc8b48725c2f3a520e245e76f7bcd8b044ac8e68b13368e54f65e7d99af4567bd9d13d9853bc58c8a1e9dca6ff9c97fc78d7528822222f0fc"
+            },
+            //Empty value hashes
+            {
+                //MD5
+                "d41d8cd98f00b204e9800998ecf8427e",
+                //SHA1
+                "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+                //SHA256
+                "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                //SHA384
+                "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b",
+                //SHA512
+                "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e"
             }
         };
 
