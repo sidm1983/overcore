@@ -4,12 +4,12 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace overcore.@string.extensions
+namespace Overcore.Text.Extensions
 {
     /// <summary>
     /// A class containing extension methods that assist in various string transformation scenarios.
     /// </summary>
-    public static class StringTransformation
+    public static class TextTransformation
     {
         /// <summary>
         /// Given an input string, a hash algorithm implementation and an optional encoding,

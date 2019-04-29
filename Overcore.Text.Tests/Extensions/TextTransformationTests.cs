@@ -1,19 +1,19 @@
 using System;
 using Xunit;
 using Xunit.Abstractions;
-using overcore.@string.extensions;
+using Overcore.Text.Extensions;
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace overcore.@string.tests.extensions
+namespace Overcore.Text.Tests.Extensions
 {
-    public class StringTransformationTests
+    public class TextTransformationTests
     {
         private readonly ITestOutputHelper output;
 
-        public StringTransformationTests(ITestOutputHelper output)
+        public TextTransformationTests(ITestOutputHelper output)
         {
             this.output = output;
         }
@@ -32,11 +32,11 @@ namespace overcore.@string.tests.extensions
         [Fact]
         public void ComputeHashHex_WithNullInput_ReturnsValidHashes()
         {
-            var actualMd5HashHex = StringTransformation.ComputeHashHex<MD5CryptoServiceProvider>(null, Encoding.UTF8);
-            var actualSha1HashHex = StringTransformation.ComputeHashHex<SHA1Managed>(null, Encoding.UTF8);
-            var actualSha256HashHex = StringTransformation.ComputeHashHex<SHA256Managed>(null, Encoding.UTF8);
-            var actualSha384HashHex = StringTransformation.ComputeHashHex<SHA384Managed>(null, Encoding.UTF8);
-            var actualSha512HashHex = StringTransformation.ComputeHashHex<SHA512Managed>(null, Encoding.UTF8);
+            var actualMd5HashHex = TextTransformation.ComputeHashHex<MD5CryptoServiceProvider>(null, Encoding.UTF8);
+            var actualSha1HashHex = TextTransformation.ComputeHashHex<SHA1Managed>(null, Encoding.UTF8);
+            var actualSha256HashHex = TextTransformation.ComputeHashHex<SHA256Managed>(null, Encoding.UTF8);
+            var actualSha384HashHex = TextTransformation.ComputeHashHex<SHA384Managed>(null, Encoding.UTF8);
+            var actualSha512HashHex = TextTransformation.ComputeHashHex<SHA512Managed>(null, Encoding.UTF8);
             Assert.Equal("d41d8cd98f00b204e9800998ecf8427e", actualMd5HashHex);
             Assert.Equal("da39a3ee5e6b4b0d3255bfef95601890afd80709", actualSha1HashHex);
             Assert.Equal("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", actualSha256HashHex);

@@ -1,13 +1,13 @@
 using System;
 using Xunit;
-using overcore.@string.extensions;
+using Overcore.Text.Extensions;
 using System.Text;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace overcore.@string.tests.extensions
+namespace Overcore.Text.Tests.Extensions
 {
-    public class StringConversionTests
+    public class TextConversionTests
     {
         [Theory]
         [InlineData("-128",                     SByte.MinValue)]
@@ -38,7 +38,7 @@ namespace overcore.@string.tests.extensions
         
         [Fact]
         public void CallingTo_WithNullInputString_ThrowsException()
-            => Assert.Throws<InvalidCastException>(() => StringConversion.To<bool>(null));
+            => Assert.Throws<InvalidCastException>(() => TextConversion.To<bool>(null));
 
         [Fact]
         public void CallingTo_WithInvalidFormatInputString_ThrowsException()
@@ -72,7 +72,7 @@ namespace overcore.@string.tests.extensions
 
     public class ToByteArrayTestData : IEnumerable<object[]>
     {
-        private static Encoding defaultEncoding = Encoding.UTF8;
+        private static readonly Encoding defaultEncoding = Encoding.UTF8;
 
         private static readonly Dictionary<string, byte[]> stringBytes = new Dictionary<string, byte[]>
         {

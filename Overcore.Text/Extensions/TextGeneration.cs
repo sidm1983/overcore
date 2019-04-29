@@ -2,12 +2,12 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace overcore.@string.extensions
+namespace Overcore.Text.Extensions
 {
     /// <summary>
     /// A class containing extension methods that assist in various string generation scenarios.
     /// </summary>
-    public static class StringGeneration
+    public static class TextGeneration
     {
         /// <summary>
         /// This extension method accepts a list of characters as a string and a length and returns a random, crytographically secure string of the specified length.

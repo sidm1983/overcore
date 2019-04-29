@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "overcore.string", "overcore.string\overcore.string.csproj", "{D4E0BCD8-D5C3-4B43-8A34-904276737486}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overcore.Text", "Overcore.Text\Overcore.Text.csproj", "{D4E0BCD8-D5C3-4B43-8A34-904276737486}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "overcore.string.tests", "overcore.string.tests\overcore.string.tests.csproj", "{466B4AD5-6EBB-4B03-812B-AF4E7A742C44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overcore.Text.Tests", "Overcore.Text.Tests\Overcore.Text.Tests.csproj", "{466B4AD5-6EBB-4B03-812B-AF4E7A742C44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

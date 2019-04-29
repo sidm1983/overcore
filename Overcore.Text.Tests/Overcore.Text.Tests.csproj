@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\overcore.string\overcore.string.csproj" />
+    <ProjectReference Include="..\Overcore.Text\Overcore.Text.csproj" />
   </ItemGroup>
 
 </Project>

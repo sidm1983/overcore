@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 
 [assembly: CLSCompliant(true)]
-namespace overcore.@string.extensions
+namespace Overcore.Text.Extensions
 {
     /// <summary>
     /// A class containing extension methods that convert a string into other types.
     /// </summary>
-    public static class StringConversion
+    public static class TextConversion
     {
         /// <summary>
         /// This extension method converts a string to a Common Language Runtime (CLR) type that has an equivalent value.
