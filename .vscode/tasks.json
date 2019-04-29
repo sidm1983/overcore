@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/overcore.string.tests/overcore.string.tests.csproj"
+                "${workspaceFolder}/Overcore.Text.Tests/Overcore.Text.Tests.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -17,7 +17,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/overcore.string.tests/overcore.string.tests.csproj"
+                "${workspaceFolder}/Overcore.Text.Tests/Overcore.Text.Tests.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -28,7 +28,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/overcore.string.tests/overcore.string.tests.csproj"
+                "${workspaceFolder}/Overcore.Text.Tests/Overcore.Text.Tests.csproj"
             ],
             "problemMatcher": "$tsc"
         }

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>overcore.string</PackageId>
+    <PackageId>Overcore.Text</PackageId>
     <Version>0.0.1</Version>
     <Authors>Sid Mansukhani</Authors>
     <Description>This package contains really handy .NET Core string extension methods.</Description>
@@ -10,7 +10,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/sidm1983/overcore</RepositoryUrl>
-    <PackageTags>c#;extensions;dotnet;.net;dotnetcore;netstandard;string</PackageTags>
+    <PackageTags>c#;extensions;dotnet;.net;dotnetcore;netstandard;string;text</PackageTags>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 

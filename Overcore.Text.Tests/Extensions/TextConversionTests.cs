@@ -1,10 +1,13 @@
 using System;
 using Xunit;
-using overcore.@string.extensions;
+using Overcore.Text.Extensions;
+using System.Text;
+using System.Collections.Generic;
+using System.Collections;
 
-namespace overcore.@string.tests.extensions
+namespace Overcore.Text.Tests.Extensions
 {
-    public class StringConversionTests
+    public class TextConversionTests
     {
         [Theory]
         [InlineData("-128",                     SByte.MinValue)]
@@ -35,7 +38,7 @@ namespace overcore.@string.tests.extensions
         
         [Fact]
         public void CallingTo_WithNullInputString_ThrowsException()
-            => Assert.Throws<InvalidCastException>(() => StringConversion.To<bool>(null));
+            => Assert.Throws<InvalidCastException>(() => TextConversion.To<bool>(null));
 
         [Fact]
         public void CallingTo_WithInvalidFormatInputString_ThrowsException()
@@ -60,5 +63,56 @@ namespace overcore.@string.tests.extensions
         [InlineData("9223372036854775807", -1)]
         public void CallingTo_WithInvalidInputStringAndDefaultValue_ReturnsDefaultValue<T>(string input, T defaultValue)
             => Assert.Equal(defaultValue, input.To<T>(defaultValue));
+
+        [Theory]
+        [ClassData(typeof(ToByteArrayTestData))]
+        public void ToByteArrayTests(string input, Encoding encoding, byte[] expectedOutput)
+            => Assert.Equal(expectedOutput, input.ToByteArray(encoding));
+    }
+
+    public class ToByteArrayTestData : IEnumerable<object[]>
+    {
+        private static readonly Encoding defaultEncoding = Encoding.UTF8;
+
+        private static readonly Dictionary<string, byte[]> stringBytes = new Dictionary<string, byte[]>
+        {
+            //Arabic
+            { "مرحبا", new byte[]{217,133,216,177,216,173,216,168,216,167} },
+            //Chinese
+            { "你好", new byte[]{228,189,160,229,165,189} },
+            //Emoji
+            { "👋", new byte[]{240,159,145,139} },
+            //English
+            { "hello", new byte[]{104,101,108,108,111} },
+            //Greek
+            { "γειά", new byte[]{206,179,206,181,206,185,206,172} },
+            //Hebrew
+            { "שלום", new byte[]{215,169,215,156,215,149,215,157} },
+            //Hindi
+            { "नमस्ते", new byte[]{224,164,168,224,164,174,224,164,184,224,165,141,224,164,164,224,165,135} },
+            //Japanese
+            { "世界", new byte[]{228,184,150,231,149,140} },
+            //Korean
+            { "세계", new byte[]{236,132,184,234,179,132} },
+            //Portuguese
+            { "Olá", new byte[]{79,108,195,161} },
+            //Russian
+            { "мир", new byte[]{208,188,208,184,209,128} },
+            //Empty string
+            { string.Empty, Array.Empty<byte>() }
+        };
+
+        public IEnumerator<object[]> GetEnumerator()
+        {
+            foreach(var s in stringBytes)
+            {
+                yield return new object[] { s.Key, defaultEncoding, s.Value };
+            }
+
+            //Adding in a 'null' string as a test.
+            yield return new object[] { null, defaultEncoding, Array.Empty<byte>() };
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

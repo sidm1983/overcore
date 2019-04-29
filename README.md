@@ -60,7 +60,7 @@ To execute all the unit tests from all the projects in the solution, run:
 
 Alternatively, you can execute the tests for a specific project by running the following command:
 
-`> dotnet test overcore.string.tests/overcore.string.tests.csproj`
+`> dotnet test Overcore.Text.Tests/Overcore.Text.Tests.csproj`
 
 ### Technology stack
 
@@ -87,15 +87,15 @@ It is also important to add certain keywords to your commit messages so that com
 
 ### Project structure
 ```
-+-- overcore.sln
-+-- overcore.string
-|   +-- extensions
-|   |   +-- StringConversion.cs
-|   +-- overcore.string.csproj
-+-- overcore.string.tests
-+-- overcore.<type>
-+-- overcore.<type>.tests
++-- Overcore.sln
++-- Overcore.Text
+|   +-- Extensions
+|   |   +-- TextConversion.cs
+|   +-- Overcore.Text.csproj
++-- Overcore.Text.Tests
++-- Overcore.<Type>
++-- Overcore.<Type>.Tests
 ```
 The solution file has multiple projects within it. The plan is to separate extension methods for a particular type into a project on its own. This means that all the extension methods of a particular type are grouped together and will ultimately be in a nuget package of their own. This allows other projects that consume this class library to only add the nuget references for the set of extension methods they need.
 
-Additionally, within the project for a particular type, the extension methods are further categorised into separate `.cs` files based on the type of action they are performing. In the directory structure above, you can see that we have a class called `StringConversion.cs` which will only contain extension method to do with converting the `string` type to other data types. If you want to add an extension method that takes a string and changes its format or contents and outputs another string, then you could put that into a file called `StringTransformation.cs` as this method would not be converting string to another type and would simply be modifying the contents of the string. Categorising the methods in this manner should help reduce the length of each code file and will provide a logical, neat structure for the extension methods. Please adhere to these guidelines as much as possible.
+Additionally, within the project for a particular type, the extension methods are further categorised into separate `.cs` files based on the type of action they are performing. In the directory structure above, you can see that we have a class called `TextConversion.cs` which will only contain extension method to do with converting the `string` type to other data types. If you want to add an extension method that takes a string and changes its format or contents and outputs another string, then you could put that into a file called `TextTransformation.cs` as this method would not be converting string to another type and would simply be modifying the contents of the string. Categorising the methods in this manner should help reduce the length of each code file and will provide a logical, neat structure for the extension methods. Please adhere to these guidelines as much as possible.

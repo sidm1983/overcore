@@ -1,12 +1,12 @@
 using System;
 using Xunit;
 using Xunit.Abstractions;
-using overcore.@string.extensions;
+using Overcore.Text.Extensions;
 using System.Linq;
 
-namespace overcore.@string.tests.extensions
+namespace Overcore.Text.Tests.Extensions
 {
-    public class StringGenerationTests
+    public class TextGenerationTests
     {
         const string alphaNumericCharSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         const int validLength = 10;
@@ -14,7 +14,7 @@ namespace overcore.@string.tests.extensions
         
         private readonly ITestOutputHelper output;
 
-        public StringGenerationTests(ITestOutputHelper output)
+        public TextGenerationTests(ITestOutputHelper output)
         {
             this.output = output;
         }
