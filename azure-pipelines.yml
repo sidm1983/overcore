@@ -22,6 +22,9 @@ variables:
   value: 'Debug'
 
 steps:
+- task: GitVersionNetCore@5
+  displayName: 'Determine semantic version'
+
 - task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
   displayName: 'Prepare analysis on SonarCloud'
   inputs:
