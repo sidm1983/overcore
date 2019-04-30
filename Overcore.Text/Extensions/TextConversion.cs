@@ -15,8 +15,19 @@ namespace Overcore.Text.Extensions
         /// </summary>
         /// <param name="input">The string to convert</param>
         /// <typeparam name="T">The CLR type into which the input string will be converted</typeparam>
-        /// <returns>An instance of the CLR type that has an equivalent value to the input string</returns>
-        public static T To<T>(this string input) => (T) Convert.ChangeType(input, typeof(T));
+        /// <returns>An object of the specified generic type that has an equivalent value to the input string</returns>
+        public static T To<T>(this string input)
+            => (T) Convert.ChangeType(input, typeof(T));
+
+        /// <summary>
+        /// This extension method converts a string to a Common Language Runtime (CLR) type that has an equivalent value using the specified format provider.
+        /// </summary>
+        /// <param name="input">The string to convert</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information</param>
+        /// <typeparam name="T">The CLR type into which the input string will be converted</typeparam>
+        /// <returns>An object of the specified generic type that has an equivalent value to the input string</returns>
+        public static T To<T>(this string input, IFormatProvider provider)
+            => (T) Convert.ChangeType(input, typeof(T), provider);
 
         /// <summary>
         /// This extension method converts a string to a Common Language Runtime (CLR) type that has an equivalent value.
@@ -25,7 +36,7 @@ namespace Overcore.Text.Extensions
         /// <param name="input">The string to convert</param>
         /// <param name="defaultValue">A user-supplied default value to return if conversion fails.</param>
         /// <typeparam name="T">The CLR type into which the input string will be converted</typeparam>
-        /// <returns>An instance of the CLR type that has an equivalent value to the input string or the supplied default value if conversion fails.</returns>
+        /// <returns>An object of the specified generic type that has an equivalent value to the input string or the supplied default value if conversion fails.</returns>
         public static T To<T>(this string input, T defaultValue)
         {
             try

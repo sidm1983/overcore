@@ -4,6 +4,7 @@ using Overcore.Text.Extensions;
 using System.Text;
 using System.Collections.Generic;
 using System.Collections;
+using System.Globalization;
 
 namespace Overcore.Text.Tests.Extensions
 {
@@ -48,6 +49,16 @@ namespace Overcore.Text.Tests.Extensions
         public void CallingTo_WithOverflowFormatInputString_ThrowsException()
             => Assert.Throws<OverflowException>(() => "9223372036854775807".To<int>());
 
+        [Theory]
+        [InlineData("25.50", "en-AU", 25.5)]
+        [InlineData("40.000,5", "id-ID", 40000.5)]
+        [InlineData("12,34.50", "hi-IN", 1234.5)]
+        public void CallingTo_WithValidInputStringAndFormatProvider_ReturnsValidOutput<T>(string input, string cultureName, T expectedOutput)
+        {
+            var cultureInfo = CultureInfo.GetCultureInfo(cultureName);
+            Assert.Equal(expectedOutput, input.To<T>(cultureInfo));
+        }
+        
         [Theory]
         [InlineData("true", false, true)]
         [InlineData("5.0", 10.0D, 5.0D)]
