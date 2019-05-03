@@ -60,20 +60,31 @@ namespace Overcore.Text.Tests.Extensions
         }
         
         [Theory]
-        [InlineData("true", false, true)]
-        [InlineData("5.0", 10.0D, 5.0D)]
-        [InlineData("0.2", 0.1f, 0.2f)]
-        [InlineData("123", 0, 123)]
-        public void CallingTo_WithValidInputStringAndDefaultValue_ReturnsValidOutputAndNotDefaultValue<T>(string input, T defaultValue, T expectedOutput)
+        [InlineData("true", false, true)] //Positive test
+        [InlineData("5.0", 10.0D, 5.0D)] //Positive test
+        [InlineData("0.2", 0.1f, 0.2f)] //Positive test
+        [InlineData("123", 0, 123)] //Positive test
+        [InlineData(null, false, false)] //Negative test
+        [InlineData("", 10.0D, 10.0D)] //Negative test
+        [InlineData("hello", 0.1f, 0.1f)] //Negative test
+        [InlineData("9223372036854775807", -1, -1)] //Negative test
+        public void To_WithInputStringAndDefaultValue_Tests<T>(string input, T defaultValue, T expectedOutput)
             => Assert.Equal(expectedOutput, input.To<T>(defaultValue));
-
+        
         [Theory]
-        [InlineData(null, false)]
-        [InlineData("", 10.0D)]
-        [InlineData("hello", 0.1f)]
-        [InlineData("9223372036854775807", -1)]
-        public void CallingTo_WithInvalidInputStringAndDefaultValue_ReturnsDefaultValue<T>(string input, T defaultValue)
-            => Assert.Equal(defaultValue, input.To<T>(defaultValue));
+        [InlineData("true", "id-ID", false, true)] //Positive test
+        [InlineData("5,0", "id-ID", 10.0D, 5.0D)] //Positive test
+        [InlineData("0,2", "id-ID", 0.1f, 0.2f)] //Positive test
+        [InlineData("1.123.000,50", "id-ID", 0.0, 1123000.5)] //Positive test
+        [InlineData(null, "id-ID", false, false)] //Negative test
+        [InlineData("", "id-ID", 10.0D, 10.0D)] //Negative test
+        [InlineData("halo", "id-ID", 0.1f, 0.1f)] //Negative test
+        [InlineData("9223372036854775807", "id-ID", -1, -1)] //Negative test
+        public void To_WithInputStringAndValidProviderAndDefaultValue_Tests<T>(string input, string cultureName, T defaultValue, T expectedOutput)
+        {
+            var cultureInfo = CultureInfo.GetCultureInfo(cultureName);
+            Assert.Equal(expectedOutput, input.To<T>(cultureInfo, defaultValue));
+        }
 
         [Theory]
         [ClassData(typeof(ToByteArrayTestData))]

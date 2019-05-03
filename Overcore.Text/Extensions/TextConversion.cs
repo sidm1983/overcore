@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 [assembly: CLSCompliant(true)]
@@ -12,18 +13,19 @@ namespace Overcore.Text.Extensions
     {
         /// <summary>
         /// This extension method converts a string to a Common Language Runtime (CLR) type that has an equivalent value.
+        /// This method uses the invariant culture during conversion. Please use the IFormatProvider overload to specify either the system's current culture or any other culture as desired.
         /// </summary>
         /// <param name="input">The string to convert</param>
         /// <typeparam name="T">The CLR type into which the input string will be converted</typeparam>
         /// <returns>An object of the specified generic type that has an equivalent value to the input string</returns>
         public static T To<T>(this string input)
-            => (T) Convert.ChangeType(input, typeof(T));
+            => To<T>(input, CultureInfo.InvariantCulture);
 
         /// <summary>
         /// This extension method converts a string to a Common Language Runtime (CLR) type that has an equivalent value using the specified format provider.
         /// </summary>
         /// <param name="input">The string to convert</param>
-        /// <param name="provider">An object that supplies culture-specific formatting information</param>
+        /// <param name="provider">An IFormatProvider object that supplies culture-specific formatting information</param>
         /// <typeparam name="T">The CLR type into which the input string will be converted</typeparam>
         /// <returns>An object of the specified generic type that has an equivalent value to the input string</returns>
         public static T To<T>(this string input, IFormatProvider provider)
@@ -32,16 +34,29 @@ namespace Overcore.Text.Extensions
         /// <summary>
         /// This extension method converts a string to a Common Language Runtime (CLR) type that has an equivalent value.
         /// Additionally, this method also accepts a default value which is returned if the string cannot be converted to the specified type.
+        /// This method uses the invariant culture during conversion. Please use the IFormatProvider overload to specify either the system's current culture or any other culture as desired.
         /// </summary>
         /// <param name="input">The string to convert</param>
-        /// <param name="defaultValue">A user-supplied default value to return if conversion fails.</param>
+        /// <param name="defaultValue">A user-supplied default value to return if conversion fails</param>
         /// <typeparam name="T">The CLR type into which the input string will be converted</typeparam>
         /// <returns>An object of the specified generic type that has an equivalent value to the input string or the supplied default value if conversion fails.</returns>
         public static T To<T>(this string input, T defaultValue)
+            => To<T>(input, CultureInfo.InvariantCulture, defaultValue);
+
+        /// <summary>
+        /// Converts a string to a Common Language Runtime (CLR) type that has an equivalent value.
+        /// Additionally, this method accepts a formatting provider and a default value which is returned if the string cannot be converted to the specified type using the specified formatting provider.
+        /// </summary>
+        /// <param name="input">The string to convert</param>
+        /// <param name="provider">An IFormatProvider object that supplies culture-specific formatting information</param>
+        /// <param name="defaultValue">A user-supplied default value to return if conversion fails</param>
+        /// <typeparam name="T">The CLR type into which the input string will be converted</typeparam>
+        /// <returns>An object of the specified generic type that has an equivalent value to the input string or the supplied default value if conversion fails.</returns>
+        public static T To<T>(this string input, IFormatProvider provider, T defaultValue)
         {
             try
             {
-                var output = To<T>(input);
+                var output = To<T>(input, provider);
 
                 if (output != null)
                 {
