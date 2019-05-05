@@ -29,7 +29,12 @@ namespace Overcore.Text.Extensions
         /// <typeparam name="T">The CLR type into which the input string will be converted</typeparam>
         /// <returns>An object of the specified generic type that has an equivalent value to the input string</returns>
         public static T To<T>(this string input, IFormatProvider provider)
-            => (T) Convert.ChangeType(input, typeof(T), provider);
+        {
+            //Getting the underlying type is needed for generic support.
+            //For example, if we want to convert the string to the generic type Nullable<T>.
+            var finalType = GetUnderlyingType(typeof(T));
+            return (T) Convert.ChangeType(input, finalType, provider);
+        }
 
         /// <summary>
         /// This extension method converts a string to a Common Language Runtime (CLR) type that has an equivalent value.
@@ -80,5 +85,20 @@ namespace Overcore.Text.Extensions
         /// <returns>An array of bytes that represent the value of the string as per the encoding</returns>
         public static byte[] ToByteArray(this string input, Encoding encoding = null)
             => (encoding ?? Encoding.UTF8).GetBytes(input ?? string.Empty);
+        
+        /// <summary>
+        /// This method returns the underlying type for a generic type.
+        /// </summary>
+        /// <param name="type">The type for which to return the underlying type</param>
+        /// <returns>The underlying type being used by the generic type or the type itself if it isn't a generic type</returns>
+        private static Type GetUnderlyingType(this Type type)
+        {
+            if(type == null || !type.IsGenericType)
+            {
+                return type;
+            }
+            
+            return type.GetGenericArguments()[0];
+        }
     }
 }

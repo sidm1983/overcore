@@ -86,6 +86,12 @@ namespace Overcore.Text.Tests.Extensions
             Assert.Equal(expectedOutput, input.To<T>(cultureInfo, defaultValue));
         }
 
+        [Fact]
+        public void TextConversion_SupportsNullableTypes()
+        {
+            Assert.Equal(123, "123".To<Nullable<int>>(CultureInfo.InvariantCulture));
+        }
+
         [Theory]
         [ClassData(typeof(ToByteArrayTestData))]
         public void ToByteArrayTests(string input, Encoding encoding, byte[] expectedOutput)
