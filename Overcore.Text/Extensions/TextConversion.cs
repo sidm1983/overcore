@@ -30,9 +30,8 @@ namespace Overcore.Text.Extensions
         /// <returns>An object of the specified generic type that has an equivalent value to the input string</returns>
         public static T To<T>(this string input, IFormatProvider provider)
         {
-            //Getting the underlying type is needed for generic support.
-            //For example, if we want to convert the string to the generic type Nullable<T>.
-            var finalType = GetUnderlyingType(typeof(T));
+            //Let's look up the underlying type if T is of type Nullable<T>.
+            var finalType = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
             return (T) Convert.ChangeType(input, finalType, provider);
         }
 
@@ -85,20 +84,5 @@ namespace Overcore.Text.Extensions
         /// <returns>An array of bytes that represent the value of the string as per the encoding</returns>
         public static byte[] ToByteArray(this string input, Encoding encoding = null)
             => (encoding ?? Encoding.UTF8).GetBytes(input ?? string.Empty);
-        
-        /// <summary>
-        /// This method returns the underlying type for a generic type.
-        /// </summary>
-        /// <param name="type">The type for which to return the underlying type</param>
-        /// <returns>The underlying type being used by the generic type or the type itself if it isn't a generic type</returns>
-        private static Type GetUnderlyingType(this Type type)
-        {
-            if(type == null || !type.IsGenericType)
-            {
-                return type;
-            }
-            
-            return type.GetGenericArguments()[0];
-        }
     }
 }
